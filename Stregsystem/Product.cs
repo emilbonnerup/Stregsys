@@ -10,48 +10,21 @@ namespace Stregsystem
 {
     class Product
     {
-        private int productId;
-        private string name;
-        private double price;
-        private bool active;
-        private bool canBeBoughtOnCredit;
+		public int ProductId { get; set; }
+		public string Name { get; set; }
+		public double Price { get; set; }
+		public bool Active { get; set; }
+		public bool CanBeBoughtOnCredit { get; set; }
 
         public Product(int productId, string name, double price, bool active, bool canBeBoughtOnCredit)
         {
-            productId = ProductId;
-            name = Name;
-            price = Price;
-            active = Active;
-            canBeBoughtOnCredit = CanBeBoughtOnCredit;
+            ProductId = productId;
+            Name = name;
+            Price = price;
+            Active = active;
+            CanBeBoughtOnCredit = canBeBoughtOnCredit;
         }
 
-        public int ProductId 
-        {
-            get { return productId; }
-        }
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-        public double Price
-        {
-            get { return price; }
-            set { price = value; }
-        }
-
-        public bool Active
-        {
-            get { return active; }
-            set { active = value; }
-        }
-
-        public bool CanBeBoughtOnCredit
-        {
-            get { return active; }
-            set { active = value; }
-        }
+       
     }
 }

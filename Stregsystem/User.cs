@@ -9,66 +9,32 @@ namespace Stregsystem
 {
     class User
     {
-        private int userId;
-        private string firstName;
-        private string lastName;
-        private string userName;
-        private string email;
-        private double balance;
+		public int UserId { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+		public string UserName { get; set; }
+		public string Email { get; set; }
+        public double Balance { get; set; }
 
         public User(int userId, string firstName, string lastName, string userName, string email, double balance)
         {
-            userId = UserId;
-            firstName = FirstName;
-            lastName = LastName;
-            userName = UserName;
-            email = Email;
-            balance = Balance;
+            UserId = userId;
+            FirstName = firstName;
+            LastName = lastName;
+            UserName = userName;
+            Email = email;
+            Balance = balance;
         }
 
         public override string ToString()
         {
-            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", firstName, lastName, userName, email);
+            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", FirstName, LastName, UserName, Email);
         }
 
         public string UserToString()
         {
-            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", firstName, lastName, userName, email);
+            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", FirstName, LastName, UserName, Email);
         }
 
-        public int UserId
-        {
-            get { return userId; }
-        }
-
-        public string FirstName
-        {
-            get { return firstName; }
-            set { firstName = value; }
-        }
-
-        public string LastName
-        {
-            get { return lastName; }
-            set { lastName = value; }
-        }
-
-        public string UserName
-        {
-            get { return userName; }
-            set { userName = value; }
-        }
-
-        public string Email
-        {
-            get { return email; }
-            set { email = value; }
-        }
-
-        public double Balance
-        {
-            get { return balance; }
-            set { balance = value; }
-        }
     }
 }
