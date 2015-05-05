@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,6 +24,16 @@ namespace Stregsystem
             userName = UserName;
             email = Email;
             balance = Balance;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", firstName, lastName, userName, email);
+        }
+
+        public string UserToString()
+        {
+            return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", firstName, lastName, userName, email);
         }
 
         public int UserId

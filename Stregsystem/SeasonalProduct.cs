@@ -10,5 +10,9 @@ namespace Stregsystem
     {
         private DateTime seasonStartDate;
         private DateTime seasonEndDate;
+
+        public SeasonalProduct(int productId, string name, double price, bool active, bool canBeBoughtOnCredit) : base(productId, name, price, active, canBeBoughtOnCredit)
+        {
+        }
     }
 }
