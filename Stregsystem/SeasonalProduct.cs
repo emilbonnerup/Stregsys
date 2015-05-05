@@ -8,6 +8,7 @@ namespace Stregsystem
 {
     class SeasonalProduct : Product
     {
-
+        private DateTime seasonStartDate;
+        private DateTime seasonEndDate;
     }
 }

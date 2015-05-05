@@ -13,6 +13,5 @@ namespace Stregsystem
         double price;
         bool active;
         bool canBeBoughtOnCredit;
-
     }
 }
