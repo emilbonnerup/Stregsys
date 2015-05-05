@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stregsystem
 {
-    internal class User
+    class User
     {
         private int userId;
         private string firstName;

@@ -14,6 +14,9 @@ namespace Stregsystem
             List<User> uList = new List<User>();
             uList.Add(u);
             
+            var p = new Product(1, "Øl", 15.50, true, false);
+            List<Product> pList = new List<Product>();
+            pList.Add(p);
         }
     }
 }
