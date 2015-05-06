@@ -10,12 +10,19 @@ namespace Stregsystem
     {
         static void Main(string[] args)
         {
-            User u = new User(1, "Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
+            User u = new User(2, "Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
+            User uu = new User(1, "Jens", "Jensen", "Jensie", "jens@jensen.dk", 15);
             List<User> uList = new List<User>();
             uList.Add(u);
+            uList.Add(uu);
+            uList.Sort();
 
-            string str = u.UserToString();
-            Console.WriteLine(str);
+
+            foreach (User user in uList)
+            {
+                Console.WriteLine(user.ToString());    
+            }
+
             Console.ReadKey();
 
             var p = new Product(1, "Øl", 15.50, true, false);

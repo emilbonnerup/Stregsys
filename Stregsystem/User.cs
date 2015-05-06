@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Stregsystem
 {
-    class User
+    class User : IComparable<User>
     {
 		public int UserId { get; set; }
 		public string FirstName { get; set; }
@@ -36,5 +36,10 @@ namespace Stregsystem
             return string.Format("Navn: {0} {1}, brugernavn: {2}, email: {3}", FirstName, LastName, UserName, Email);
         }
 
+
+        int IComparable<User>.CompareTo(User other)
+        {
+            return this.UserId.CompareTo(other.UserId);
+        }
     }
 }
