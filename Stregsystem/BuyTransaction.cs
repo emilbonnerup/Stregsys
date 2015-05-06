@@ -10,7 +10,7 @@ namespace Stregsystem
     {
         public Product Product { get; set; }
 
-        public BuyTransaction(int transactionId, User user, DateTime date, double amount, Product product) : base(transactionId, user, date, amount)
+        public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
             Product = product;
         }
@@ -21,15 +21,15 @@ namespace Stregsystem
                 Product.Name, Date, Amount, TransactionId);
         }
 
-        public void Execute(User user, Product product, double amount, int transactionId)
+        public void Execute(User user, Product product)
         {
             if (Product.CanBeBoughtOnCredit == true)
             {
-                user.Balance -= amount;  
+                user.Balance -= product.Price;  
             }
-            else if (Product.CanBeBoughtOnCredit == false && user.Balance > amount)
+            else if (Product.CanBeBoughtOnCredit == false && user.Balance > product.Price)
             {
-                user.Balance -= amount;
+                user.Balance -= product.Price;
             }
             else throw new InsufficientCreditsException(user, product);
             

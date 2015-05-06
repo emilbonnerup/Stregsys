@@ -15,7 +15,7 @@ namespace Stregsystem
 
         private static int tIdCounter = 0;
 
-        public Transaction(int transactionId, User user, DateTime date, double amount)
+        public Transaction(User user, DateTime date, double amount)
         {
             this.TransactionId = System.Threading.Interlocked.Increment(ref tIdCounter);
             User = user;

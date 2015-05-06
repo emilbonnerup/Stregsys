@@ -18,7 +18,7 @@ namespace Stregsystem
 
         private static int idCounter = 0;
 
-        public User(int userId, string firstName, string lastName, string userName, string email, double balance)
+        public User(string firstName, string lastName, string userName, string email, double balance)
         {
             this.UserId = System.Threading.Interlocked.Increment(ref idCounter);
             FirstName = firstName;
