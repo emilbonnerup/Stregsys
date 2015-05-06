@@ -16,9 +16,11 @@ namespace Stregsystem
 		public string Email { get; set; }
         public double Balance { get; set; }
 
+        private static int idCounter = 0;
+
         public User(int userId, string firstName, string lastName, string userName, string email, double balance)
         {
-            UserId = userId;
+            this.UserId = System.Threading.Interlocked.Increment(ref idCounter);
             FirstName = firstName;
             LastName = lastName;
             UserName = userName;
