@@ -9,11 +9,16 @@ namespace Stregsystem
 {
     class Stregsystem
     {
-        public BuyTransaction BuyTransaction;
+        public BuyTransaction buyTransaction;
+
+        public Stregsystem(BuyTransaction buyTransaction)
+        {
+            this.buyTransaction = buyTransaction;
+        }
 
         public void BuyProduct(User user, Product product)
         {
-            BuyTransaction.Execute(user, product);
+            buyTransaction.Execute(user, product);
         }
 
         public void AddCreditsToAccount(User user, double amount)

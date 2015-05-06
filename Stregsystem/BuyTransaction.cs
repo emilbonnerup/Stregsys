@@ -12,7 +12,8 @@ namespace Stregsystem
 
         public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
-            Product = product;
+            this.Product = product;
+            this.User = user;
         }
 
         public override string ToString()
