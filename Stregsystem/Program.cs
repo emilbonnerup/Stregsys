@@ -54,22 +54,29 @@ namespace Stregsystem
             while(!reader.EndOfStream)
             {
                 if(!reader.EndOfStream) { reader.ReadLine(); }
+                
                 var line = reader.ReadLine();
                 var values = line.Split(';');
+                  
                 int id = Convert.ToInt32(values[0]);
                 string name = values[1];
                 double price = Convert.ToDouble(values[2]) / 10;
                 int temp = Convert.ToInt32(values[3]);
                 bool active = Convert.ToBoolean(temp);
 
+
+                if(string.IsNullOrEmpty(values[4]))
+                { 
                 Product p = new Product(id, name, price,
                     active, false);
                 products.Add(p);
-
-                if(values[4] != string.Empty)
+                }
+               
+                else if( string.IsNullOrEmpty(values[4]) != true)
                 {
+                    DateTime dt = DateTime.ParseExact(values[4], "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                     SeasonalProduct sp = new SeasonalProduct(id, name, price, active,
-                        false, DateTime.Now, Convert.ToDateTime(values[4]));
+                        false, DateTime.Now, dt);
                     seasonProducts.Add(sp);
                 }
             }
