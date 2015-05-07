@@ -12,8 +12,8 @@ namespace Stregsystem
 
         public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
-            this.Product = product;
-            this.User = user;
+            Product = product;
+            User = user;
         }
 
         public override string ToString()
@@ -22,8 +22,9 @@ namespace Stregsystem
                 Product.Name, Date, Amount, TransactionId);
         }
 
-        public void Execute(User user, Product product)
+        public Transaction Execute(User user, Product product)
         {
+            var transaction = new BuyTransaction(user, DateTime.Now, product.Price, product);
             if (Product.CanBeBoughtOnCredit == true)
             {
                 user.Balance -= product.Price;  
@@ -33,7 +34,8 @@ namespace Stregsystem
                 user.Balance -= product.Price;
             }
             else throw new InsufficientCreditsException(user, product);
-            
+
+            return transaction;
         }
 
    

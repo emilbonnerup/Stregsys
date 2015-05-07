@@ -24,8 +24,6 @@ namespace Stregsystem
             Price = price;
             Active = active;
             CanBeBoughtOnCredit = canBeBoughtOnCredit;
-        }
-
-       
+        }    
     }
 }
