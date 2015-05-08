@@ -47,9 +47,11 @@ namespace Stregsystem
                             if (stringParts[0] == user.UserName)
                             {
                                 stregsystem.Transactions.Add(stregsystem.BuyProduct(user, product));
-                            } 
+                            }
+                            else cli.DisplayUserNotFound(user);
                         }
                     }
+                    else Console.WriteLine("You have not entered a correct Id as the second parameter.");
                 }
             }
         }
