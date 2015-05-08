@@ -15,6 +15,7 @@ namespace Stregsystem
 
         List<Transaction> transactions = new List<Transaction>(); 
         List<Product> products = new List<Product>(); 
+        List<User> users = new List<User>(); 
 
         public Stregsystem(BuyTransaction buyTransaction, InsertCashTransaction insertCashTransaction, Product product)
         {
@@ -33,9 +34,19 @@ namespace Stregsystem
             get { return transactions; }
         }
 
-        public void FillProductList()
+        public List<Product> Products
         {
-            products = product.ReadFromFile();
+            get { return products; }
+        }
+
+        public List<User> Users
+        {
+            get { return users; }
+        } 
+
+        public void FillProductList()
+        { 
+           // products = product.ReadFromFile();
         }
 
         public Transaction BuyProduct(User user, Product product)

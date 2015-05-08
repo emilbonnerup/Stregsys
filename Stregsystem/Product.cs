@@ -25,6 +25,11 @@ namespace Stregsystem
             Active = active;
             CanBeBoughtOnCredit = canBeBoughtOnCredit;
         }
+
+        public Product()
+        {
+            
+        }
         
         public List<Product> ReadFromFile()
         {

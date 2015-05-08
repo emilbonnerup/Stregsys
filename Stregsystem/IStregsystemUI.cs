@@ -1,6 +1,6 @@
 ﻿namespace Stregsystem
 {
-    public interface IStregsystemUI
+    interface IStregsystemUi
     {
         void DisplayUserNotFound(User user);
         void DisplayProductNotFound(Product product);

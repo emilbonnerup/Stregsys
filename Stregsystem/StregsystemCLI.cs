@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stregsystem
 {
-    class StregsystemCLI : IStregsystemUI
+    class StregsystemCLI : IStregsystemUi
     {
         public Stregsystem stregsystem;
         
@@ -37,15 +37,21 @@ namespace Stregsystem
 
         public void DisplayUserInfo(User user)
         {
-            
-            List<Transaction> userTransactions = new List<Transaction>();
-            userTransactions = stregsystem.GetTransactions(stregsystem.Transactions, user, 10);
-            Console.WriteLine("Username: {0}, full name: {1} {2}, balance: {3}", user.UserName, user.FirstName, user.LastName, user.Balance);
-            foreach (var transaction in userTransactions)
+            foreach (var u in stregsystem.Users)
             {
-                Console.WriteLine(transaction.ToString());  
+                if (string.Equals(u.UserName, user.UserName))
+                {
+                    List<Transaction> userTransactions = new List<Transaction>();
+                    userTransactions = stregsystem.GetTransactions(stregsystem.Transactions, user, 10);
+                    Console.WriteLine("Username: {0}, full name: {1} {2}, balance: {3}", user.UserName, user.FirstName, user.LastName, user.Balance);
+                    foreach (var transaction in userTransactions)
+                    {
+                        Console.WriteLine(transaction.ToString());  
+                    }
+                    user.LowBalance(); 
+                }
+                else DisplayUserNotFound(user);
             }
-            user.LowBalance();
         }
 
         public void DisplayTooManyArgumentsError()
