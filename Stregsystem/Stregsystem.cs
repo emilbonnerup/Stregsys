@@ -11,11 +11,31 @@ namespace Stregsystem
     {
         public BuyTransaction buyTransaction;
         public InsertCashTransaction insertCashTransaction;
+        public Product product;
 
-        public Stregsystem(BuyTransaction buyTransaction, InsertCashTransaction insertCashTransaction)
+        List<Transaction> transactions = new List<Transaction>(); 
+        List<Product> products = new List<Product>(); 
+
+        public Stregsystem(BuyTransaction buyTransaction, InsertCashTransaction insertCashTransaction, Product product)
         {
             this.buyTransaction = buyTransaction;
             this.insertCashTransaction = insertCashTransaction;
+            this.product = product;
+        }
+
+        public Stregsystem()
+        {
+            
+        }
+
+        public List<Transaction> Transactions
+        {
+            get { return transactions; }
+        }
+
+        public void FillProductList()
+        {
+            products = product.ReadFromFile();
         }
 
         public Transaction BuyProduct(User user, Product product)
@@ -57,10 +77,26 @@ namespace Stregsystem
             {
                 if (string.Equals(transaction.User.UserName, user.UserName))
                 {
-                    
+                    uTransactions.Add(transaction);  
                 } 
             }
+
+            uTransactions.Reverse();
+            uTransactions.RemoveRange(number, uTransactions.Count-1);
             return uTransactions;
+        }
+
+        public List<Product> GetActiveProducts(List<Product> products)
+        {
+            List<Product> activeProducts = new List<Product>();
+            foreach (var product in products)
+            {
+                if (product.Active)
+                {
+                    activeProducts.Add(product);
+                } 
+            }
+            return activeProducts;
         } 
 
     }
