@@ -17,6 +17,7 @@ namespace Stregsystem
 
         public void Start(StregsystemCommandParser parser)
         {
+            User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             stregsystem.FillProductList();
             Console.WriteLine("   -Emils stregsystem-   \n\n");
             Console.WriteLine("Indtast nu din kommando til stregsystemet: ");

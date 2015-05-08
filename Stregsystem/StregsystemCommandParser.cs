@@ -22,18 +22,36 @@ namespace Stregsystem
 
         public void ParseCommand(string command)
         {
-            var commandParts = command.Split(' ');
-            if (string.IsNullOrEmpty(commandParts[1]))
+
+            List<string> stringParts = new List<string>(command.Split(' '));
+            
+            if (stringParts.Count == 1)
             {
                 foreach (var user in stregsystem.Users)
                 {
-                    if (string.Equals(commandParts[0], user.UserName))
+                    if (string.Equals(stringParts[0], user.UserName))
                     {
                         cli.DisplayUserInfo(user);
                     }
+                    else Console.WriteLine("You have not entered a correct username.");
                 }
             }
-
+            if (stringParts.Count == 2)
+            {
+                foreach (var product in stregsystem.Products)
+                {
+                    if (Convert.ToInt32(stringParts[1]) == product.ProductId)
+                    {
+                        foreach (var user in stregsystem.Users)
+                        {
+                            if (stringParts[0] == user.UserName)
+                            {
+                                stregsystem.Transactions.Add(stregsystem.BuyProduct(user, product));
+                            } 
+                        }
+                    }
+                }
+            }
         }
     }
 }
