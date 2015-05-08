@@ -29,7 +29,7 @@ namespace Stregsystem
         public Transaction Execute(User user, Product product)
         {
             var transaction = new BuyTransaction(user, DateTime.Now, product.Price, product);
-            if (Product.CanBeBoughtOnCredit == true)
+            if (Product.CanBeBoughtOnCredit)
             {
                 user.Balance -= product.Price;  
             }

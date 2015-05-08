@@ -12,7 +12,7 @@ namespace Stregsystem
         public BuyTransaction buyTransaction;
         public InsertCashTransaction insertCashTransaction;
 
-        public Stregsystem(BuyTransaction buyTransaction)
+        public Stregsystem(BuyTransaction buyTransaction, InsertCashTransaction insertCashTransaction)
         {
             this.buyTransaction = buyTransaction;
             this.insertCashTransaction = insertCashTransaction;

@@ -33,7 +33,7 @@ namespace Stregsystem
             return string.Format("Id: {0}, Amount: {1}, Time: {2}", TransactionId, Amount, Date);
         }
 
-        public void execute()
+        public void Execute()
         {
             
         }

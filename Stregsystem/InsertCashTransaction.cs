@@ -9,8 +9,13 @@ namespace Stregsystem
     class InsertCashTransaction : Transaction
     {
 
-        public InsertCashTransaction(int transactionId, User user, DateTime date, double amount) : base(user, date, amount)
+        public InsertCashTransaction(User user, DateTime date, double amount) : base(user, date, amount)
         { 
+        }
+
+        public InsertCashTransaction()
+        {
+            
         }
 
         public override string ToString()

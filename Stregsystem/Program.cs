@@ -21,7 +21,8 @@ namespace Stregsystem
         {
             Program program = new Program();
             BuyTransaction buyTransaction = new BuyTransaction();
-            Stregsystem stregsystem = new Stregsystem(buyTransaction);
+            InsertCashTransaction insertCashTransaction = new InsertCashTransaction();
+            Stregsystem stregsystem = new Stregsystem(buyTransaction, insertCashTransaction);
 
             List<Transaction> transactions = new List<Transaction>();
 
@@ -35,7 +36,8 @@ namespace Stregsystem
 
             var p = new Product(1, "Øl", 15.50, true, false);
 
-            transactions.Add(stregsystem.BuyProduct(u, p));
+            stregsystem.AddCreditsToAccount(u, 15);
+          //  transactions.Add(stregsystem.BuyProduct(u, p));
 
             foreach (User user in uList)
             {
