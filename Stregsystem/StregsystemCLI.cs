@@ -27,7 +27,7 @@ namespace Stregsystem
 
         public void DisplayUserNotFound(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("User with username: {0} not found.", user.UserName);
         }
 
         public void DisplayProductNotFound(Product product)
