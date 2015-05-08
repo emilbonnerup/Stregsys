@@ -67,7 +67,7 @@ namespace Stregsystem
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("User: {0} has bought {1} for {2}", transaction.User.UserName, transaction.Product.Name, transaction.Product.Price);
         }
 
         public void Close()

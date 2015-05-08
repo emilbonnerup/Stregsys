@@ -13,7 +13,7 @@ namespace Stregsystem
         public InsertCashTransaction insertCashTransaction;
         public Product product;
 
-        List<Transaction> transactions = new List<Transaction>(); 
+        List<BuyTransaction> transactions = new List<BuyTransaction>(); 
         List<Product> products = new List<Product>(); 
         List<User> users = new List<User>(); 
 

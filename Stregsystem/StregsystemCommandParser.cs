@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stregsystem
@@ -22,7 +23,6 @@ namespace Stregsystem
 
         public void ParseCommand(string command)
         {
-
             List<string> stringParts = new List<string>(command.Split(' '));
             
             if (stringParts.Count == 1)
@@ -36,17 +36,24 @@ namespace Stregsystem
                     else Console.WriteLine("You have not entered a correct username.");
                 }
             }
-            if (stringParts.Count == 2)
+            else  if (stringParts.Count == 2)
             {
+                int id = Convert.ToInt32(stringParts[1]);
                 foreach (var product in stregsystem.Products)
                 {
-                    if (Convert.ToInt32(stringParts[1]) == product.ProductId)
+                    if (id == product.ProductId)
                     {
                         foreach (var user in stregsystem.Users)
                         {
                             if (stringParts[0] == user.UserName)
                             {
-                                stregsystem.Transactions.Add(stregsystem.BuyProduct(user, product));
+                                
+                                if (user.Balance >= product.Price)
+                                {
+                                    stregsystem.Transactions.Add(stregsystem.BuyProduct(user, product));
+                                    cli.DisplayUserBuysProduct();
+                                }
+                                else cli.DisplayInsufficientCash();
                             }
                             else cli.DisplayUserNotFound(user);
                         }
