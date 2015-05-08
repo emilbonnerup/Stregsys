@@ -32,5 +32,10 @@ namespace Stregsystem
         {
             
         }
+
+        public Product GetProduct(List<Product> products, int id)
+        {
+            return products[id + 1];
+        }
     }
 }

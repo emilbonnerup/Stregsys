@@ -34,11 +34,6 @@ namespace Stregsystem
             uList.Add(uu);
             uList.Sort();
 
-            var p = new Product(1, "Øl", 15.50, true, false);
-
-            stregsystem.AddCreditsToAccount(u, 15);
-          //  transactions.Add(stregsystem.BuyProduct(u, p));
-
             foreach (User user in uList)
             {
                 Console.WriteLine(user.ToString());
