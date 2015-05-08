@@ -26,6 +26,8 @@ namespace Stregsystem
 
             List<Transaction> transactions = new List<Transaction>();
 
+            List<Product> pList = program.ReadFromFile();
+
             // Debugging
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             User uu = new User("Jens", "Jensen", "Jensie", "jens@jensen.dk", 15);
@@ -34,13 +36,15 @@ namespace Stregsystem
             uList.Add(uu);
             uList.Sort();
 
+            stregsystem.BuyProduct(u, pList[12+1]);
+
             foreach (User user in uList)
             {
                 Console.WriteLine(user.ToString());
                 Console.WriteLine("ID: {0}, Balance: {1}",user.UserId, user.Balance);
             }
 
-            List<Product> pList = program.ReadFromFile();
+            
 
             Console.ReadKey();
         }
@@ -55,14 +59,17 @@ namespace Stregsystem
 
             while(!reader.EndOfStream)
             {
-                if(!reader.EndOfStream) { reader.ReadLine(); }
+                if (!reader.EndOfStream)
+                {
+                    reader.ReadLine(); 
+                }
                 
                 var line = reader.ReadLine();
                 var values = line.Split(';');
                   
                 int id = Convert.ToInt32(values[0]);
                 string name = values[1];
-                double price = Convert.ToDouble(values[2]) / 10;
+                double price = Convert.ToDouble(values[2]) / 100;
                 int temp = Convert.ToInt32(values[3]);
                 bool active = Convert.ToBoolean(temp);
 

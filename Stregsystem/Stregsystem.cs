@@ -37,5 +37,31 @@ namespace Stregsystem
         {
             return products[id + 1];
         }
+
+        public User GetUser(List<User> users, string username)
+        {
+            foreach (User user in users)
+            {
+                while (string.Equals(user.UserName, username))
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+
+        public List<Transaction> GetTransactions(List<Transaction> transactions, User user, int number)
+        {
+            List<Transaction> uTransactions = new List<Transaction>();
+            foreach (var transaction in transactions)
+            {
+                if (string.Equals(transaction.User.UserName, user.UserName))
+                {
+                    
+                } 
+            }
+            return uTransactions;
+        } 
+
     }
 }
