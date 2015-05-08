@@ -10,20 +10,22 @@ namespace Stregsystem
     class Stregsystem
     {
         public BuyTransaction buyTransaction;
+        public InsertCashTransaction insertCashTransaction;
 
         public Stregsystem(BuyTransaction buyTransaction)
         {
             this.buyTransaction = buyTransaction;
+            this.insertCashTransaction = insertCashTransaction;
         }
 
-        public void BuyProduct(User user, Product product)
+        public Transaction BuyProduct(User user, Product product)
         {
-            buyTransaction.Execute(user, product);
+            return buyTransaction.Execute(user, product);
         }
 
         public void AddCreditsToAccount(User user, double amount)
         {
-            
+            insertCashTransaction.Execute(user, amount);
         }
 
         public void ExecuteTransaction(Transaction transaction)

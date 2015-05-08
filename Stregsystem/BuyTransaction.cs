@@ -13,7 +13,11 @@ namespace Stregsystem
         public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
             Product = product;
-            User = user;
+        }
+
+        public BuyTransaction()
+        {
+            
         }
 
         public override string ToString()
@@ -29,7 +33,7 @@ namespace Stregsystem
             {
                 user.Balance -= product.Price;  
             }
-            else if (Product.CanBeBoughtOnCredit == false && user.Balance > product.Price)
+            else if (Product.CanBeBoughtOnCredit == false && user.Balance >= product.Price)
             {
                 user.Balance -= product.Price;
             }

@@ -22,6 +22,11 @@ namespace Stregsystem
             Date = date;
             Amount = amount;
         }
+
+        public Transaction() 
+        {
+            
+        }
         
         public override string ToString()
         {

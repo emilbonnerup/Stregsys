@@ -15,11 +15,16 @@ namespace Stregsystem
         private BuyTransaction buyTransaction;
         private Stregsystem stregsystem;
         public Transaction transaction;
-
         public InsertCashTransaction insertCashTransaction;
 
         static void Main(string[] args)
         {
+            Program program = new Program();
+            BuyTransaction buyTransaction = new BuyTransaction();
+            Stregsystem stregsystem = new Stregsystem(buyTransaction);
+
+            List<Transaction> transactions = new List<Transaction>();
+
             // Debugging
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             User uu = new User("Jens", "Jensen", "Jensie", "jens@jensen.dk", 15);
@@ -30,7 +35,7 @@ namespace Stregsystem
 
             var p = new Product(1, "Øl", 15.50, true, false);
 
-            // -------------
+            transactions.Add(stregsystem.BuyProduct(u, p));
 
             foreach (User user in uList)
             {
@@ -38,12 +43,12 @@ namespace Stregsystem
                 Console.WriteLine("ID: {0}, Balance: {1}",user.UserId, user.Balance);
             }
 
-            List<Product> pList = ReadFromFile();
+            List<Product> pList = program.ReadFromFile();
 
             Console.ReadKey();
         }
 
-        public static List<Product> ReadFromFile()
+        public List<Product> ReadFromFile()
         {
             List<Product> products = new List<Product>();
             List<SeasonalProduct> seasonProducts = new List<SeasonalProduct>();
@@ -64,21 +69,19 @@ namespace Stregsystem
                 int temp = Convert.ToInt32(values[3]);
                 bool active = Convert.ToBoolean(temp);
 
-
-                if(string.IsNullOrEmpty(values[4]))
-                { 
                 Product p = new Product(id, name, price,
                     active, false);
                 products.Add(p);
-                }
+                
                
-                else if( string.IsNullOrEmpty(values[4]) != true)
-                {
-                    DateTime dt = DateTime.ParseExact(values[4], "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                    SeasonalProduct sp = new SeasonalProduct(id, name, price, active,
-                        false, DateTime.Now, dt);
-                    seasonProducts.Add(sp);
-                }
+           //     else if( string.IsNullOrEmpty(values[4]) != true)
+           //     {
+           //         
+           //         DateTime dt = DateTime.ParseExact(values[4], "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+           //         SeasonalProduct sp = new SeasonalProduct(id, name, price, active,
+           //             false, DateTime.Now, dt);
+           //         seasonProducts.Add(sp);
+           //     }
             }
             return products;
         }
