@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,17 +19,38 @@ namespace Stregsystem
         public void Start(StregsystemCommandParser parser)
         {
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
+            stregsystem.Users.Add(u);
+
             stregsystem.FillProductList();
-            Console.WriteLine("   -Emils stregsystem-   \n\n");
-            Console.WriteLine("Indtast nu din kommando til stregsystemet: ");
-            string input = Console.ReadLine();
-            parser.ParseCommand(input);
+            
+            PrintStartMenu();
+
+            parser.ParseCommand(PromptForCommand());
 
         }
 
+        public void PrintStartMenu()
+        {
+            Console.WriteLine("   -Emils stregsystem-   \n\n");
+            Console.WriteLine("| Id |      Product     |    Price    |");
+            foreach (var product in stregsystem.Products)
+            {
+                Console.WriteLine(product.ToString());
+            }
+        }
+
+        public string PromptForCommand()
+        {
+            Console.WriteLine("Indtast nu din kommando til stregsystemet: ");
+            string input = Console.ReadLine();
+            return input;
+        }
+
+
+
         public void DisplayUserNotFound(User user)
         {
-            Console.WriteLine("User with username: {0} not found.", user.UserName);
+            Console.WriteLine("User with username: {0} not found. Try again", user.UserName);
         }
 
         public void DisplayProductNotFound(Product product)
@@ -44,14 +66,20 @@ namespace Stregsystem
                 {
                     List<Transaction> userTransactions = new List<Transaction>();
                     userTransactions = stregsystem.GetTransactions(stregsystem.Transactions, user, 10);
-                    Console.WriteLine("Username: {0}, full name: {1} {2}, balance: {3}", user.UserName, user.FirstName, user.LastName, user.Balance);
+                    Console.WriteLine("Username: {0}, full name: {1} {2}, balance: {3}", user.UserName, user.FirstName,
+                        user.LastName, user.Balance);
+
                     foreach (var transaction in userTransactions)
                     {
-                        Console.WriteLine(transaction.ToString());  
+                        Console.WriteLine(transaction.ToString());
                     }
-                    user.LowBalance(); 
+                    user.LowBalance();
                 }
-                else DisplayUserNotFound(user);
+                else
+                {
+                    DisplayUserNotFound(user);
+
+                }
             }
         }
 

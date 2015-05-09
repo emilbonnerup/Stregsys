@@ -33,7 +33,7 @@ namespace Stregsystem
                     {
                         cli.DisplayUserInfo(user);
                     }
-                    else Console.WriteLine("You have not entered a correct username.");
+                    else Console.WriteLine("User with username: {0} not found. Try again.", stringParts[0]);
                 }
             }
             else  if (stringParts.Count == 2)
@@ -50,10 +50,9 @@ namespace Stregsystem
                                 
                                 if (user.Balance >= product.Price)
                                 {
-                                    stregsystem.Transactions.Add(stregsystem.BuyProduct(user, product));
-                                    cli.DisplayUserBuysProduct();
+                                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));  
                                 }
-                                else cli.DisplayInsufficientCash();
+                                 
                             }
                             else cli.DisplayUserNotFound(user);
                         }
