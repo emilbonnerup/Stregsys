@@ -37,6 +37,7 @@ namespace Stregsystem
         public List<Product> Products
         {
             get { return products; }
+            set { products = value; }
         }
 
         public List<User> Users
@@ -44,9 +45,9 @@ namespace Stregsystem
             get { return users; }
         } 
 
-        public void FillProductList()
-        { 
-            products = product.ReadFromFile();
+        public List<Product> FillProductList(List<Product> products)
+        {
+            return products = product.ReadFromFile();
         }
 
         public Transaction BuyProduct(User user, Product product)

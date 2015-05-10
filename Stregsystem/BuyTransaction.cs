@@ -28,7 +28,7 @@ namespace Stregsystem
 
         public Transaction Execute(User user, Product product)
         {
-            this.Product = product;
+            Product = product;
             var transaction = new BuyTransaction(user, DateTime.Now, product.Price, product);
             if (Product.CanBeBoughtOnCredit)
             {

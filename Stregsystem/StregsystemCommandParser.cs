@@ -46,13 +46,8 @@ namespace Stregsystem
                         foreach (var user in stregsystem.Users)
                         {
                             if (stringParts[0] == user.UserName)
-                            {
-                                
-                                if (user.Balance >= product.Price)
-                                {
-                                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));  
-                                }
-                                 
+                            {   
+                                stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));  
                             }
                             else cli.DisplayUserNotFound(user);
                         }

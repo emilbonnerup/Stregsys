@@ -21,7 +21,7 @@ namespace Stregsystem
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             stregsystem.Users.Add(u);
 
-            stregsystem.FillProductList();
+            stregsystem.Products = stregsystem.FillProductList(stregsystem.Products);
             
             PrintStartMenu();
 
