@@ -47,7 +47,7 @@ namespace Stregsystem
 
         public List<Product> FillProductList(List<Product> products)
         {
-            return products = product.ReadFromFile();
+            return products = product.ReadFromFile(products);
         }
 
         public Transaction BuyProduct(User user, Product product)
