@@ -46,7 +46,7 @@ namespace Stregsystem
 
         public string PromptForCommand()
         {
-            Console.WriteLine("Indtast nu din kommando til stregsystemet: ");
+            Console.WriteLine("Enter your command (format: username id amount): ");
             string input = Console.ReadLine();
             return input;
         }

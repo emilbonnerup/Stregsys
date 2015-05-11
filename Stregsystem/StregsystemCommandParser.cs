@@ -46,13 +46,43 @@ namespace Stregsystem
                         foreach (var user in stregsystem.Users)
                         {
                             if (stringParts[0] == user.UserName)
-                            {   
-                                
+                            {    
                                 if (user.Balance >= product.Price)
                                 {
                                     stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
                                     cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
                                 }
+                                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
+                            }
+                            else cli.DisplayUserNotFound(stringParts[0]);
+                        }
+                    }
+                    // Product not found?
+                }
+            }
+
+            else if (stringParts.Count == 3)
+            {
+                int id = Convert.ToInt32(stringParts[1]);
+                int count = Convert.ToInt32(stringParts[2]);
+                foreach (var product in stregsystem.Products)
+                {
+                    if (id == product.ProductId && product.Active == true)
+                    {
+                        foreach (var user in stregsystem.Users)
+                        {
+                            if (stringParts[0] == user.UserName)
+                            {    
+                                if (user.Balance >= product.Price * count )
+                                {
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
+                                        cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product)); 
+                                    }
+                                    
+                                }
+                                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
                             }
                             else cli.DisplayUserNotFound(stringParts[0]);
                         }
