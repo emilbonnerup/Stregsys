@@ -38,7 +38,7 @@ namespace Stregsystem
         {
             if (Balance <= 50)
             {
-                Console.WriteLine("Your accountbalance is Low. Consider adding more funds.\n"); 
+                Console.WriteLine("Du har under 50 kr. tilbage på din konto. Overvej at tilføje flere.\n"); 
             }
         }
 

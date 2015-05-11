@@ -41,8 +41,8 @@ namespace Stregsystem
 
             else if (stringParts.Count == 3)
             {
-
                 int count = Convert.ToInt32(stringParts[2]);
+
                 for (int i = 0; i < count; i++)
                 {
                     BuyProductCommand(stringParts);  
@@ -69,7 +69,7 @@ namespace Stregsystem
 
             if (user != null && product != null)
             {
-                if(user.Balance >= product.Price)
+                if(user.Balance >= product.Price || product.CanBeBoughtOnCredit )
                 {
                     stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
                     cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
