@@ -13,9 +13,9 @@ namespace Stregsystem
         public InsertCashTransaction insertCashTransaction;
         public Product product;
 
-        List<Transaction> transactions = new List<Transaction>(); 
-        List<Product> products = new List<Product>(); 
-        List<User> users = new List<User>(); 
+        List<Transaction> transactions = new List<Transaction>();            
+        List<User> users = new List<User>();
+        List<Product> products = new List<Product>();
 
         public Stregsystem(BuyTransaction buyTransaction, InsertCashTransaction insertCashTransaction, Product product)
         {
@@ -34,24 +34,28 @@ namespace Stregsystem
             get { return transactions; }
         }
 
+        public List<User> Users
+        {
+            get { return users; }
+        }
+
         public List<Product> Products
         {
             get { return products; }
             set { products = value; }
-        }
 
-        public List<User> Users
-        {
-            get { return users; }
         } 
 
-        public List<Product> FillProductList(List<Product> products)
+        public List<Product> FillProductList()
         {
-            return products = product.ReadFromFile(products);
+            product = new Product();
+            return products = product.ReadFromFile();
         }
 
         public Transaction BuyProduct(User user, Product product)
-        {
+        {   
+            buyTransaction = new BuyTransaction();
+                                    
             return buyTransaction.Execute(user, product);
         }
 
@@ -62,10 +66,7 @@ namespace Stregsystem
 
         public void ExecuteTransaction(Transaction transaction)
         {
-            if (transaction.User.Balance >= transaction.Amount)
-            {
-                transactions.Add(transaction); 
-            }
+            transactions.Add(transaction);
         }
 
         public Product GetProduct(List<Product> products, int id)

@@ -31,8 +31,9 @@ namespace Stregsystem
             
         }
         
-        public List<Product> ReadFromFile(List<Product> products)
+        public List<Product> ReadFromFile()
         {
+            List<Product> products = new List<Product>();
             List<SeasonalProduct> seasonProducts = new List<SeasonalProduct>();
             string currentPath = AppDomain.CurrentDomain.BaseDirectory + "products.csv";
 

@@ -33,7 +33,7 @@ namespace Stregsystem
                     {
                         cli.DisplayUserInfo(user);
                     }
-                    else Console.WriteLine("User with username: {0} not found. Try again.", stringParts[0]);
+                    else cli.DisplayUserNotFound(stringParts[0]);
                 }
             }
             else  if (stringParts.Count == 2)
@@ -41,18 +41,23 @@ namespace Stregsystem
                 int id = Convert.ToInt32(stringParts[1]);
                 foreach (var product in stregsystem.Products)
                 {
-                    if (id == product.ProductId)
+                    if (id == product.ProductId && product.Active == true)
                     {
                         foreach (var user in stregsystem.Users)
                         {
                             if (stringParts[0] == user.UserName)
                             {   
-                                stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));  
+                                
+                                if (user.Balance >= product.Price)
+                                {
+                                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
+                                    cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
+                                }
                             }
-                            else cli.DisplayUserNotFound(user);
+                            else cli.DisplayUserNotFound(stringParts[0]);
                         }
                     }
-                    else Console.WriteLine("You have not entered a correct Id as the second parameter.");
+                    // Product not found?
                 }
             }
         }

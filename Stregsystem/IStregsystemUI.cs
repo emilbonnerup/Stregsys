@@ -2,7 +2,7 @@
 {
     interface IStregsystemUi
     {
-        void DisplayUserNotFound(User user);
+        void DisplayUserNotFound(string username);
         void DisplayProductNotFound(Product product);
         void DisplayUserInfo(User user);
         void DisplayTooManyArgumentsError();

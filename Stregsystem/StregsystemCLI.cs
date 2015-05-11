@@ -21,12 +21,13 @@ namespace Stregsystem
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             stregsystem.Users.Add(u);
 
-            stregsystem.Products = stregsystem.FillProductList(stregsystem.Products);
-            
+            stregsystem.Products = stregsystem.FillProductList();
             PrintStartMenu();
-
-            parser.ParseCommand(PromptForCommand());
-
+            while (true)
+            {
+                
+                parser.ParseCommand(PromptForCommand());
+            }      
         }
 
         public void PrintStartMenu()
@@ -35,7 +36,11 @@ namespace Stregsystem
             Console.WriteLine("| Id |      Product     |    Price    |");
             foreach (var product in stregsystem.Products)
             {
-                Console.WriteLine(product.ToString());
+                if (product.Active == true)
+                {
+                    Console.WriteLine(product.ToString());   
+                }
+               
             }
         }
 
@@ -48,9 +53,9 @@ namespace Stregsystem
 
 
 
-        public void DisplayUserNotFound(User user)
+        public void DisplayUserNotFound(string username)
         {
-            Console.WriteLine("User with username: {0} not found. Try again", user.UserName);
+            Console.WriteLine("User with username: {0} not found. Try again", username);
         }
 
         public void DisplayProductNotFound(Product product)
@@ -68,8 +73,13 @@ namespace Stregsystem
                     userTransactions = stregsystem.GetTransactions(stregsystem.Transactions, user, 10);
                     Console.WriteLine("Username: {0}, full name: {1} {2}, balance: {3}", user.UserName, user.FirstName,
                         user.LastName, user.Balance);
+                    Console.WriteLine("{0}'s transactions:", user.UserName);
+                    if (userTransactions.Count == 0)
+                    {
+                        Console.WriteLine("User {0} has not made any transactions yet. ", user.UserName);
+                    }
 
-                    foreach (var transaction in userTransactions)
+                    else foreach (var transaction in userTransactions)
                     {
                         Console.WriteLine(transaction.ToString());
                     }
@@ -77,7 +87,7 @@ namespace Stregsystem
                 }
                 else
                 {
-                    DisplayUserNotFound(user);
+                    DisplayUserNotFound(user.UserName);
 
                 }
             }
@@ -95,7 +105,7 @@ namespace Stregsystem
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
         {
-            Console.WriteLine("User: {0} has bought {1} for {2}", transaction.User.UserName, transaction.Product.Name, transaction.Product.Price);
+            Console.WriteLine("User: {0} has bought {1} for {2} kr.", transaction.User.UserName, transaction.Product.Name, transaction.Product.Price);
         }
 
         public void Close()
