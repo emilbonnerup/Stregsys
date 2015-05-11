@@ -3,7 +3,7 @@
     interface IStregsystemUi
     {
         void DisplayUserNotFound(string username);
-        void DisplayProductNotFound(Product product);
+        void DisplayProductNotFound(int id);
         void DisplayUserInfo(User user);
         void DisplayTooManyArgumentsError();
         void DisplayAdminCommandNotFoundMessage();

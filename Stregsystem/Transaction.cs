@@ -8,16 +8,16 @@ namespace Stregsystem
 {
     class Transaction
     {
+        private static int currentId;
+
         public int TransactionId { get; set; }
         public User User { get; set; }
         public DateTime Date { get; set; }
         public double Amount { get; set; }
 
-        private static int tIdCounter = 0;
-
         public Transaction(User user, DateTime date, double amount)
         {
-            this.TransactionId = System.Threading.Interlocked.Increment(ref tIdCounter);
+            TransactionId = GetNextId();
             User = user;
             Date = date;
             Amount = amount;
@@ -26,6 +26,16 @@ namespace Stregsystem
         public Transaction() 
         {
             
+        }
+
+        static Transaction()
+        {
+            currentId = 1;
+        }
+
+        protected int GetNextId()
+        {
+            return ++currentId;
         }
         
         public override string ToString()

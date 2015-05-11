@@ -24,72 +24,68 @@ namespace Stregsystem
         public void ParseCommand(string command)
         {
             List<string> stringParts = new List<string>(command.Split(' '));
-            
+
             if (stringParts.Count == 1)
             {
-                foreach (var user in stregsystem.Users)
+                if (stregsystem.GetUser(stregsystem.Users, stringParts[0]) == null)
                 {
-                    if (string.Equals(stringParts[0], user.UserName))
-                    {
-                        cli.DisplayUserInfo(user);
-                    }
-                    else cli.DisplayUserNotFound(stringParts[0]);
+                    cli.DisplayUserNotFound(stringParts[0]);
                 }
+                else cli.DisplayUserInfo(stregsystem.GetUser(stregsystem.Users, stringParts[0]));
             }
+
             else  if (stringParts.Count == 2)
             {
-                int id = Convert.ToInt32(stringParts[1]);
-                foreach (var product in stregsystem.Products)
-                {
-                    if (id == product.ProductId && product.Active == true)
-                    {
-                        foreach (var user in stregsystem.Users)
-                        {
-                            if (stringParts[0] == user.UserName)
-                            {    
-                                if (user.Balance >= product.Price)
-                                {
-                                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
-                                    cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
-                                }
-                                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
-                            }
-                            else cli.DisplayUserNotFound(stringParts[0]);
-                        }
-                    }
-                    // Product not found?
-                }
+                BuyProductCommand(stringParts);  
             }
 
             else if (stringParts.Count == 3)
             {
-                int id = Convert.ToInt32(stringParts[1]);
+
                 int count = Convert.ToInt32(stringParts[2]);
-                foreach (var product in stregsystem.Products)
+                for (int i = 0; i < count; i++)
                 {
-                    if (id == product.ProductId && product.Active == true)
-                    {
-                        foreach (var user in stregsystem.Users)
-                        {
-                            if (stringParts[0] == user.UserName)
-                            {    
-                                if (user.Balance >= product.Price * count )
-                                {
-                                    for (int i = 0; i < count; i++)
-                                    {
-                                        stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
-                                        cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product)); 
-                                    }
-                                    
-                                }
-                                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
-                            }
-                            else cli.DisplayUserNotFound(stringParts[0]);
-                        }
-                    }
-                    // Product not found?
+                    BuyProductCommand(stringParts);  
                 }
             }
+        }
+
+        public void BuyProductCommand(List<string> stringParts)
+        {
+            var id = Convert.ToInt32(stringParts[1]);
+            var products = stregsystem.GetActiveProducts(stregsystem.Products);
+            var product = stregsystem.GetProduct(products, id);
+            var user = stregsystem.GetUser(stregsystem.Users, stringParts[0]);
+
+            if (product == null)
+            {
+                cli.DisplayProductNotFound(id);
+            }
+
+            if (user == null)
+            {
+                cli.DisplayUserNotFound(stringParts[0]);
+            }
+
+            if (user != null && product != null)
+            {
+                if(user.Balance >= product.Price)
+                {
+                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
+                    cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
+                }
+                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));     
+            }
+        }
+
+        public bool IsOnlyDigits(string part)
+        {
+            foreach (var c in part)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
     }
 }

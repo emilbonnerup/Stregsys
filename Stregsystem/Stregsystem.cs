@@ -71,14 +71,21 @@ namespace Stregsystem
 
         public Product GetProduct(List<Product> products, int id)
         {
-            return products[id + 1];
+            foreach (var product in products)
+            {
+                if (product.ProductId == id)
+                {
+                    return product;  
+                }  
+            }
+            return null;
         }
 
         public User GetUser(List<User> users, string username)
         {
-            foreach (User user in users)
+            foreach (var user in users)
             {
-                while (string.Equals(user.UserName, username))
+                if (string.Equals(user.UserName, username))
                 {
                     return user;
                 }
