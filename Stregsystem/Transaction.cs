@@ -40,7 +40,7 @@ namespace Stregsystem
         
         public override string ToString()
         {
-            return string.Format("Id: {0}, Amount: {1}, Time: {2}", TransactionId, Amount, Date);
+            return string.Format("Id: {0}, Kr.: {1}, Tidspunkt: {2}", TransactionId, Amount, Date);
         }
 
         public void Execute()

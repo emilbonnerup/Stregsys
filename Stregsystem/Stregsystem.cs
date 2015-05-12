@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -69,30 +70,35 @@ namespace Stregsystem
         public void ExecuteTransaction(Transaction transaction)
         {
             transactions.Add(transaction);
+            TransactionLog();
+            WriteTransaction(transaction);
+        }
+
+        public void TransactionLog()
+        {
+            const string filePath = @".\log.txt";
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
+        }
+
+        private void WriteTransaction(Transaction transaction)
+        {
+            const string filePath = @".\log.txt";
+            var write = File.AppendText(filePath);
+            write.WriteLine(transaction.ToString());
+            write.Close();  
         }
 
         public Product GetProduct(List<Product> products, int id)
         {
-            foreach (var product in products)
-            {
-                if (product.ProductId == id)
-                {
-                    return product;  
-                }  
-            }
-            return null;
+            return products.FirstOrDefault(product => product.ProductId == id);
         }
 
         public User GetUser(List<User> users, string username)
         {
-            foreach (var user in users)
-            {
-                if (string.Equals(user.UserName, username))
-                {
-                    return user;
-                }
-            }
-            return null;
+            return users.FirstOrDefault(user => string.Equals(user.UserName, username));
         }
 
         public List<Transaction> GetTransactions(List<Transaction> transactions, User user, int number)

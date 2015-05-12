@@ -27,6 +27,7 @@ namespace Stregsystem
             UserName = userName;
             Email = email;
             Balance = balance;
+            IsUserInputValid();
         }
 
         public override string ToString()
@@ -76,7 +77,7 @@ namespace Stregsystem
 
         int IComparable<User>.CompareTo(User other)
         {
-            return this.UserId.CompareTo(other.UserId);
+            return UserId.CompareTo(other.UserId);
         }
     }
 }

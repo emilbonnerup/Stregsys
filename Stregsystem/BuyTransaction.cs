@@ -8,7 +8,7 @@ namespace Stregsystem
 {
     class BuyTransaction : Transaction
     {
-        public Product Product { get; set; }
+        public Product Product { get; private set; }
 
         public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
@@ -22,7 +22,7 @@ namespace Stregsystem
 
         public override string ToString()
         {
-            return string.Format("User {0} has bought {1} at {2} for {3} kr. Transaction Id: {4}", User.UserName,
+            return string.Format("Bruger {0} har købt {1} d. {2} for {3} kr. Transaktions Id: {4}", User.UserName,
                 Product.Name, Date, Amount, TransactionId);
         }
 
