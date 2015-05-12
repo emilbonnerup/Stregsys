@@ -20,7 +20,6 @@ namespace Stregsystem
         {
             User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
             stregsystem.Users.Add(u);
-
             stregsystem.Products = stregsystem.FillProductList();
             PrintStartMenu();
             while (true)
@@ -104,7 +103,8 @@ namespace Stregsystem
 
         public void Close()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Programmet lukkes");
+            Environment.Exit(0);
         }
 
         public void DisplayInsufficientCash(BuyTransaction transaction)
