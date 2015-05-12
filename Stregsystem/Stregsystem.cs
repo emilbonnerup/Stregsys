@@ -63,6 +63,7 @@ namespace Stregsystem
         {
             insertCashTransaction = new InsertCashTransaction();
             insertCashTransaction.Execute(user, amount);
+            ExecuteTransaction(new Transaction(user, DateTime.Now, amount));
         }
 
         public void ExecuteTransaction(Transaction transaction)
@@ -96,14 +97,7 @@ namespace Stregsystem
 
         public List<Transaction> GetTransactions(List<Transaction> transactions, User user, int number)
         {
-            var uTransactions = new List<Transaction>();
-            foreach (var transaction in transactions)
-            {
-                if (string.Equals(transaction.User.UserName, user.UserName))
-                {
-                    uTransactions.Add(transaction);  
-                } 
-            }
+            var uTransactions = transactions.Where(transaction => string.Equals(transaction.User.UserName, user.UserName)).ToList();
 
             uTransactions.Reverse();
             if (uTransactions.Count > 10)
@@ -115,15 +109,7 @@ namespace Stregsystem
 
         public List<Product> GetActiveProducts(List<Product> products)
         {
-            var activeProducts = new List<Product>();
-            foreach (var product in products)
-            {
-                if (product.Active)
-                {
-                    activeProducts.Add(product);
-                } 
-            }
-            return activeProducts;
+            return products.Where(product => product.Active).ToList();
         }
 
         public void ActivateProduct(int id)

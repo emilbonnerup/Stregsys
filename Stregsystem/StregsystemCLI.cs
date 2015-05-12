@@ -100,8 +100,8 @@ namespace Stregsystem
         public void PrintStartMenu()
         {
             var menuList = new List<Product>();
-            Console.WriteLine("   -Emils stregsystem-   \n\n");
-            Console.WriteLine("| Id |      Produkt     |    Pris   |");
+            Console.WriteLine("{0,35}", "-Emils stregsystem-");
+            Console.WriteLine("|{0,5}|{1,40}|{2,5}|", "Id", "Produkt", "Pris");
             menuList = stregsystem.GetActiveProducts(stregsystem.Products);
             foreach (var product in menuList)
             {

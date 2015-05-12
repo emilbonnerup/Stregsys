@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -44,7 +45,8 @@ namespace Stregsystem
                     reader.ReadLine();
                 }
 
-                var line = reader.ReadLine();
+                var lineHTML = reader.ReadLine();
+                var line = RemoveHTML(lineHTML);
                 var values = line.Split(';');
 
                 var id = Convert.ToInt32(values[0]);
@@ -60,9 +62,14 @@ namespace Stregsystem
             return products;
         }
 
+        public static string RemoveHTML(string source)
+        {
+            return Regex.Replace(source, "<.*?>", string.Empty);
+        }
+
         public override string ToString()
         {
-            return string.Format("| {0} | {1} | {2} |", ProductId, Name, Price);
+            return string.Format("|{0,5}|{1,40}|{2,5}|", ProductId, Name, Price);
         }
     }
 }

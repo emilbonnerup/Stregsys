@@ -34,28 +34,26 @@ namespace Stregsystem
                 return;
             }
 
-            if (stringParts.Count == 1)
+            switch (stringParts.Count)
             {
-                if (stregsystem.GetUser(stregsystem.Users, stringParts[0]) == null)
-                {
-                    cli.DisplayUserNotFound(stringParts[0]);
-                }
-                else cli.DisplayUserInfo(stregsystem.GetUser(stregsystem.Users, stringParts[0]));
-            }
+                case 1:
+                    if (stregsystem.GetUser(stregsystem.Users, stringParts[0]) == null)
+                    {
+                        cli.DisplayUserNotFound(stringParts[0]);
+                    }
+                    else cli.DisplayUserInfo(stregsystem.GetUser(stregsystem.Users, stringParts[0]));
+                    break;
+                case 2:
+                    BuyProductCommand(stringParts);
+                    break;
+                case 3:
+                    var count = Convert.ToInt32(stringParts[2]);
 
-            else  if (stringParts.Count == 2)
-            {
-                BuyProductCommand(stringParts);  
-            }
-
-            else if (stringParts.Count == 3)
-            {
-                var count = Convert.ToInt32(stringParts[2]);
-
-                for (var i = 0; i < count; i++)
-                {
-                    BuyProductCommand(stringParts);  
-                }
+                    for (var i = 0; i < count; i++)
+                    {
+                        BuyProductCommand(stringParts);  
+                    }
+                    break;
             }
         }
 
@@ -82,25 +80,18 @@ namespace Stregsystem
                 cli.DisplayUserNotFound(stringParts[0]); 
             }
 
-            if (user != null && product != null)
+            if (user == null || product == null) return;
+            if(user.Balance >= product.Price || product.CanBeBoughtOnCredit )
             {
-                if(user.Balance >= product.Price || product.CanBeBoughtOnCredit )
-                {
-                    stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
-                    cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
-                }
-                else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));     
+                stregsystem.ExecuteTransaction(stregsystem.BuyProduct(user, product));
+                cli.DisplayUserBuysProduct(new BuyTransaction(user, DateTime.Now, product.Price, product));
             }
+            else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
         }
 
         public bool IsOnlyDigits(string part)
         {
-            foreach (var c in part)
-            {
-                if (c < '0' || c > '9')
-                    return false;
-            }
-            return true;
+            return part.All(c => c >= '0' && c <= '9');
         }
 
         private void AdminCommands(List<string> stringParts)

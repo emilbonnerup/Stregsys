@@ -30,7 +30,7 @@ namespace Stregsystem
 
         static Transaction()
         {
-            currentId = 1;
+            currentId = 0;
         }
 
         protected int GetNextId()
