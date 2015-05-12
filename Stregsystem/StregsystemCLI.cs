@@ -1,50 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Stregsystem
 {
-    class StregsystemCLI : IStregsystemUi
+    internal class StregsystemCLI : IStregsystemUi
     {
         public Stregsystem stregsystem;
-        
+
         public StregsystemCLI(Stregsystem stregsystem)
         {
             this.stregsystem = stregsystem;
-        }
-
-        public void Start(StregsystemCommandParser parser)
-        {
-            User u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
-            stregsystem.Users.Add(u);
-            stregsystem.Products = stregsystem.FillProductList();
-            PrintStartMenu();
-            while (true)
-            {   
-                parser.ParseCommand(PromptForCommand());
-            }      
-        }
-
-        public void PrintStartMenu()
-        {
-            List<Product> menuList = new List<Product>();
-            Console.WriteLine("   -Emils stregsystem-   \n\n");
-            Console.WriteLine("| Id |      Produkt     |    Pris   |");
-            menuList = stregsystem.GetActiveProducts(stregsystem.Products);
-            foreach (var product in menuList)
-            {
-                Console.WriteLine(product.ToString()); 
-            }
-        }
-
-        public string PromptForCommand()
-        {
-            Console.WriteLine("Indtast din kommando (format: username id amount): ");
-            string input = Console.ReadLine();
-            return input;
         }
 
         public void DisplayUserNotFound(string username)
@@ -63,9 +28,10 @@ namespace Stregsystem
             {
                 if (string.Equals(u.UserName, user.UserName))
                 {
-                    List<Transaction> userTransactions = new List<Transaction>();
+                    var userTransactions = new List<Transaction>();
                     userTransactions = stregsystem.GetTransactions(stregsystem.Transactions, user, 10);
-                    Console.WriteLine("Brugernavn: {0}, fuldt navn: {1} {2}, balance: {3}", user.UserName, user.FirstName,
+                    Console.WriteLine("Brugernavn: {0}, fuldt navn: {1} {2}, balance: {3}", user.UserName,
+                        user.FirstName,
                         user.LastName, user.Balance);
                     Console.WriteLine("{0}'s transaktioner:", user.UserName);
                     if (userTransactions.Count == 0)
@@ -73,10 +39,11 @@ namespace Stregsystem
                         Console.WriteLine("Brugeren {0} har ikke lavet nogle transaktioner endnu. ", user.UserName);
                     }
 
-                    else foreach (var transaction in userTransactions)
-                    {
-                        Console.WriteLine(transaction.ToString());
-                    }
+                    else
+                        foreach (var transaction in userTransactions)
+                        {
+                            Console.WriteLine(transaction.ToString());
+                        }
                     user.LowBalance();
                 }
                 else
@@ -98,7 +65,8 @@ namespace Stregsystem
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
         {
-            Console.WriteLine("Bruger: {0} har købt {1} for {2} kr.", transaction.User.UserName, transaction.Product.Name, transaction.Product.Price);
+            Console.WriteLine("Bruger: {0} har købt {1} for {2} kr.", transaction.User.UserName,
+                transaction.Product.Name, transaction.Product.Price);
         }
 
         public void Close()
@@ -111,10 +79,41 @@ namespace Stregsystem
         {
             Console.WriteLine("Du har ikke nok penge på din konto til at foretage dette køb.");
         }
-                                                             
+
         public void DisplayGeneralError(string errorString)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Der er opstået en fejl: {0}", errorString);
+        }
+
+        public void Start(StregsystemCommandParser parser)
+        {
+            var u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
+            stregsystem.Users.Add(u);
+            stregsystem.Products = stregsystem.FillProductList();
+            PrintStartMenu();
+            while (true)
+            {
+                parser.ParseCommand(PromptForCommand());
+            }
+        }
+
+        public void PrintStartMenu()
+        {
+            var menuList = new List<Product>();
+            Console.WriteLine("   -Emils stregsystem-   \n\n");
+            Console.WriteLine("| Id |      Produkt     |    Pris   |");
+            menuList = stregsystem.GetActiveProducts(stregsystem.Products);
+            foreach (var product in menuList)
+            {
+                Console.WriteLine(product.ToString());
+            }
+        }
+
+        public string PromptForCommand()
+        {
+            Console.WriteLine("Indtast din kommando (format: username id amount): ");
+            var input = Console.ReadLine();
+            return input;
         }
 
         public void DisplayIdNotCorrect(string argument)

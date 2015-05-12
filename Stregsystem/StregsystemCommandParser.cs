@@ -103,7 +103,7 @@ namespace Stregsystem
             return true;
         }
 
-        public void AdminCommands(List<string> stringParts)
+        private void AdminCommands(List<string> stringParts)
         {
             if (!adminCommands.ContainsKey(stringParts[0]))
             {
