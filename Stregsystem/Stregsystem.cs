@@ -61,6 +61,7 @@ namespace Stregsystem
 
         public void AddCreditsToAccount(User user, double amount)
         {
+            insertCashTransaction = new InsertCashTransaction();
             insertCashTransaction.Execute(user, amount);
         }
 
@@ -123,7 +124,31 @@ namespace Stregsystem
                 } 
             }
             return activeProducts;
-        } 
+        }
+
+        public void ActivateProduct(int id)
+        {
+            var product = GetProduct(products, id);
+            product.Active = true;
+        }
+
+        public void DeactivateProduct(int id)
+        {
+            var product = GetProduct(products, id);
+            product.Active = false;
+        }
+
+        public void ProductActivateBuyOnCredit(int id)
+        {
+            var product = GetProduct(products, id);
+            product.CanBeBoughtOnCredit = true;
+        }
+
+        public void ProductDeactivateBuyOnCredit(int id)
+        {
+            var product = GetProduct(products, id);
+            product.CanBeBoughtOnCredit = false;
+        }
 
     }
 }

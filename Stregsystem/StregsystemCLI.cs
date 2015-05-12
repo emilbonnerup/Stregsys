@@ -83,7 +83,6 @@ namespace Stregsystem
                 else
                 {
                     DisplayUserNotFound(user.UserName);
-
                 }
             }
         }
@@ -95,7 +94,7 @@ namespace Stregsystem
 
         public void DisplayAdminCommandNotFoundMessage()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Den indtastede admin kommando eksisterer ikke. Prøv igen.");
         }
 
         public void DisplayUserBuysProduct(BuyTransaction transaction)
@@ -110,9 +109,9 @@ namespace Stregsystem
 
         public void DisplayInsufficientCash(BuyTransaction transaction)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Du har ikke nok penge på din konto til at foretage dette køb.");
         }
-
+                                                             
         public void DisplayGeneralError(string errorString)
         {
             throw new NotImplementedException();
@@ -121,6 +120,11 @@ namespace Stregsystem
         public void DisplayIdNotCorrect(string argument)
         {
             Console.WriteLine("Argumentet du har indtast: '{0}' er ikke et korrekt Id. Prøv igen.", argument);
+        }
+
+        public void DisplayIncorrectAmountAdded()
+        {
+            Console.WriteLine("Du kan ikke indsætte mindre end 1 krone på en konto.");
         }
     }
 }
