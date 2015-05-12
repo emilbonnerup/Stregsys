@@ -96,7 +96,7 @@ namespace Stregsystem
 
         public List<Transaction> GetTransactions(List<Transaction> transactions, User user, int number)
         {
-            List<Transaction> uTransactions = new List<Transaction>();
+            var uTransactions = new List<Transaction>();
             foreach (var transaction in transactions)
             {
                 if (string.Equals(transaction.User.UserName, user.UserName))
@@ -115,7 +115,7 @@ namespace Stregsystem
 
         public List<Product> GetActiveProducts(List<Product> products)
         {
-            List<Product> activeProducts = new List<Product>();
+            var activeProducts = new List<Product>();
             foreach (var product in products)
             {
                 if (product.Active)

@@ -19,9 +19,9 @@ namespace Stregsystem
 
         static void Main(string[] args)
         {
-            Stregsystem stregsystem = new Stregsystem();
-            StregsystemCLI cli = new StregsystemCLI(stregsystem); 
-            StregsystemCommandParser parser = new StregsystemCommandParser(stregsystem, cli);
+            var stregsystem = new Stregsystem();
+            var cli = new StregsystemCLI(stregsystem); 
+            var parser = new StregsystemCommandParser(stregsystem, cli);
             cli.Start(parser);
 
             Console.ReadKey();

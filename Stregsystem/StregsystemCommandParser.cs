@@ -26,7 +26,7 @@ namespace Stregsystem
 
         public void ParseCommand(string command)
         {
-            List<string> stringParts = new List<string>(command.Split(' '));
+            var stringParts = new List<string>(command.Split(' '));
 
             if (stringParts[0].Contains(':'))
             {
@@ -50,9 +50,9 @@ namespace Stregsystem
 
             else if (stringParts.Count == 3)
             {
-                int count = Convert.ToInt32(stringParts[2]);
+                var count = Convert.ToInt32(stringParts[2]);
 
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     BuyProductCommand(stringParts);  
                 }
