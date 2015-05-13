@@ -10,9 +10,9 @@ namespace Stregsystem
 {
     class Stregsystem
     {
-        public BuyTransaction buyTransaction;
-        public InsertCashTransaction insertCashTransaction;
-        public Product product;
+        private BuyTransaction buyTransaction;
+        private InsertCashTransaction insertCashTransaction;
+        private Product product;
 
         List<Transaction> transactions = new List<Transaction>();            
         List<User> users = new List<User>();
@@ -50,7 +50,7 @@ namespace Stregsystem
         public List<Product> FillProductList()
         {
             product = new Product();
-            return products = product.ReadFromFile();
+            return products = Product.ReadFromFile();
         }
 
         public Transaction BuyProduct(User user, Product product)
@@ -74,7 +74,7 @@ namespace Stregsystem
             WriteTransaction(transaction);
         }
 
-        public void TransactionLog()
+        private void TransactionLog()
         {
             const string filePath = @".\log.txt";
             if (!File.Exists(filePath))

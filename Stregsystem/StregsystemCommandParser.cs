@@ -11,8 +11,8 @@ namespace Stregsystem
 {
     class StregsystemCommandParser
     {
-        public Stregsystem stregsystem;
-        public StregsystemCLI cli;
+        private Stregsystem stregsystem;
+        private StregsystemCLI cli;
         private Dictionary<string, Delegate> adminCommands;  
 
 
@@ -57,7 +57,7 @@ namespace Stregsystem
             }
         }
 
-        public void BuyProductCommand(List<string> stringParts)
+        private void BuyProductCommand(List<string> stringParts)
         {
             var id = Convert.ToInt32(stringParts[1]);
             var products = stregsystem.GetActiveProducts(stregsystem.Products);
@@ -89,7 +89,7 @@ namespace Stregsystem
             else cli.DisplayInsufficientCash(new BuyTransaction(user, DateTime.Now, product.Price, product));
         }
 
-        public bool IsOnlyDigits(string part)
+        private bool IsOnlyDigits(string part)
         {
             return part.All(c => c >= '0' && c <= '9');
         }

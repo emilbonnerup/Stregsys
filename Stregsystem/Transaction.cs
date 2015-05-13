@@ -10,10 +10,10 @@ namespace Stregsystem
     {
         private static int currentId;
 
-        public int TransactionId { get; set; }
-        public User User { get; set; }
-        public DateTime Date { get; set; }
-        public double Amount { get; set; }
+        protected int TransactionId { get; private set; }
+        public User User { get; private set; }
+        protected DateTime Date { get; private set; }
+        protected double Amount { get; private set; }
 
         public Transaction(User user, DateTime date, double amount)
         {
@@ -23,7 +23,7 @@ namespace Stregsystem
             Amount = amount;
         }
 
-        public Transaction() 
+        protected Transaction() 
         {
             
         }
@@ -33,7 +33,7 @@ namespace Stregsystem
             currentId = 0;
         }
 
-        protected int GetNextId()
+        private int GetNextId()
         {
             return ++currentId;
         }

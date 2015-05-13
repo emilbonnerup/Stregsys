@@ -11,12 +11,6 @@ namespace Stregsystem
     class Program
     {
 
-        public Product product;
-        private BuyTransaction buyTransaction;
-        private Stregsystem stregsystem;
-        public Transaction transaction;
-        public InsertCashTransaction insertCashTransaction;
-
         static void Main(string[] args)
         {
             var stregsystem = new Stregsystem();

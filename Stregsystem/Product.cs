@@ -24,13 +24,13 @@ namespace Stregsystem
         {
         }
 
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public double Price { get; set; }
+        public int ProductId { get; private set; }
+        public string Name { get; private set; }
+        public double Price { get; private set; }
         public bool Active { get; set; }
         public bool CanBeBoughtOnCredit { get; set; }
 
-        public List<Product> ReadFromFile()
+        public static List<Product> ReadFromFile()
         {
             var products = new List<Product>();
             var seasonProducts = new List<SeasonalProduct>();
@@ -62,7 +62,7 @@ namespace Stregsystem
             return products;
         }
 
-        public static string RemoveHTML(string source)
+        private static string RemoveHTML(string source)
         {
             return Regex.Replace(source, "<.*?>", string.Empty);
         }

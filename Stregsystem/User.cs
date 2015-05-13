@@ -10,11 +10,11 @@ namespace Stregsystem
 {
     class User : IComparable<User>
     {
-		public int UserId { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string UserName { get; set; }
-		public string Email { get; set; }
+        private int UserId { get; set; }
+		public string FirstName { get; private set; }
+		public string LastName { get; private set; }
+		public string UserName { get; private set; }
+        private string Email { get; set; }
         public double Balance { get; set; }
 
         private static int idCounter = 0;
@@ -43,7 +43,7 @@ namespace Stregsystem
             }
         }
 
-        public void IsUserInputValid()
+        private void IsUserInputValid()
         {
             if (string.IsNullOrEmpty(FirstName))
             {

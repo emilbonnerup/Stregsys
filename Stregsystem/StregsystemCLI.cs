@@ -87,8 +87,8 @@ namespace Stregsystem
 
         public void Start(StregsystemCommandParser parser)
         {
-            var u = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
-            stregsystem.Users.Add(u);
+            var testUser = new User("Emil", "Bønnerup", "emilbonnerup", "emilbonnerup@me.com", 100);
+            stregsystem.Users.Add(testUser);
             stregsystem.Products = stregsystem.FillProductList();
             PrintStartMenu();
             while (true)
@@ -97,7 +97,7 @@ namespace Stregsystem
             }
         }
 
-        public void PrintStartMenu()
+        private void PrintStartMenu()
         {
             var menuList = new List<Product>();
             Console.WriteLine("{0,35}", "-Emils stregsystem-");
@@ -109,7 +109,7 @@ namespace Stregsystem
             }
         }
 
-        public string PromptForCommand()
+        private string PromptForCommand()
         {
             Console.WriteLine("Indtast din kommando (format: username id amount): ");
             var input = Console.ReadLine();

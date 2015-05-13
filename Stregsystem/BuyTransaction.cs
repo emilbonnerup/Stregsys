@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Using
+
+using System;
+
+#endregion
 
 namespace Stregsystem
 {
-    class BuyTransaction : Transaction
+    internal class BuyTransaction : Transaction
     {
-        public Product Product { get; private set; }
-
         public BuyTransaction(User user, DateTime date, double amount, Product product) : base(user, date, amount)
         {
             Product = product;
@@ -17,8 +15,9 @@ namespace Stregsystem
 
         public BuyTransaction()
         {
-            
         }
+
+        public Product Product { get; private set; }
 
         public override string ToString()
         {
@@ -32,7 +31,7 @@ namespace Stregsystem
             var transaction = new BuyTransaction(user, DateTime.Now, product.Price, product);
             if (Product.CanBeBoughtOnCredit)
             {
-                user.Balance -= product.Price;  
+                user.Balance -= product.Price;
             }
             else if (Product.CanBeBoughtOnCredit == false && user.Balance >= product.Price)
             {
@@ -42,7 +41,5 @@ namespace Stregsystem
 
             return transaction;
         }
-
-   
     }
 }
